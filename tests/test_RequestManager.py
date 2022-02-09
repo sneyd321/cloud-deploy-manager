@@ -1,6 +1,6 @@
 import app
 from app.api.request import RequestManager
-
+import os
 
 
 def test_path_with_no_parameters():
@@ -26,7 +26,10 @@ def test_get_all_pages():
     requestManager = RequestManager("teradici", "deploy")
     requestManager.add_query_param("page", 1)
     requestManager.add_query_param("per_page", 100)
-    requestManager.add_authorization("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")
+    token = os.environ.get('TOKEN', "")
+    print(token)
+    if token:
+        requestManager.add_authorization(token)
     since = requestManager.parse_date("2019-06-01")
     until = requestManager.parse_date("2020-05-31")
     requestManager.add_date_query_param("since", since)

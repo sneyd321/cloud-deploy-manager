@@ -46,9 +46,18 @@ class RequestManager:
         commits = []
         page = 1
         while page <= page_limit:
-            response = requests.get(self.get_fully_qualified_path(), headers=self._headers)
-            if not response.ok:
-                continue
+            try:
+                response = requests.get(self.get_fully_qualified_path(), headers=self._headers)
+               
+
+                if not response.ok:
+                    print(response.status_code)
+                    page += 1
+                    continue
+            except requests.exceptions.Timeout:
+                return commits
+            except requests.exceptions.RequestException as e:
+                return commits
             responseAsJson = response.json()
             #If response is empty list
             if not responseAsJson:

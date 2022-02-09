@@ -3,10 +3,14 @@ from flask import jsonify, request, Response, abort
 from app.api.repository import CommitRepository
 from app.api.request import RequestManager
 from app import cache
+import os
 
 commitRepository = CommitRepository()
 requestManager = RequestManager("teradici", "deploy")
-#requestManager.add_authorization("")
+token = os.environ.get('TOKEN', "")
+print(token)
+if token:
+    requestManager.add_authorization(token)
 requestManager.add_query_param("page", 1)
 requestManager.add_query_param("per_page", 100)
 PAGE_LIMIT = 5

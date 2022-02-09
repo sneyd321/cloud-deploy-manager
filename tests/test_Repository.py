@@ -2,9 +2,14 @@
 import pytest, requests
 from app.api.repository import CommitRepository
 from app.api.request import RequestManager
+import os
+
 
 requestManager = RequestManager("teradici", "deploy")
-#requestManager.add_authorization("")
+token = os.environ.get('TOKEN', "")
+print(token)
+if token:
+    requestManager.add_authorization(token)
 
 PAGE_LIMIT = 1
 

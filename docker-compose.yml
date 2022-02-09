@@ -1,0 +1,23 @@
+version: '3.5'
+
+services: 
+    cloud-deploy-manager-service:
+        build: .
+        ports: 
+            - 8080:8080
+        restart: on-failure
+        environment:
+         - PORT=8080
+        volumes: 
+            - ./:/usr/src/app
+ 
+
+    redis: 
+      image: redis
+      ports:
+      - 6379:6379
+
+ 
+            
+
+ 

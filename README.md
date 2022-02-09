@@ -3,7 +3,7 @@ This is project for a technical interview for teradici. The goal was to develop 
 
 This application is written in Python + Flask and deployed using Gunicorn.
 
-##Running
+## Running
 After cloning the repoistory run
 ```
 docker-compose build
@@ -25,12 +25,12 @@ cloud-deploy-manager-service:
         volumes: 
             - ./:/usr/src/app
 ```
-##Testing
+## Testing
 To test the code run
 ```
 docker-compose run cloud-deploy-manager-service pytest  
 ```
-##Design Choices
+## Design Choices
 The server deployed as a repository style architecture. I chose this because I think i provides a nice layer of abstraction between the models I defined and the application logice handleing the request.
 
 Instead of parsing the response data directly I decided to use keyword arguments to map the response into python objects. This was done to increase the readablility and maintainability of the server. Using python objects also allows for more extendability for the server if it was required to anything further.

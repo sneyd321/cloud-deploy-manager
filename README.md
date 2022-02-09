@@ -31,15 +31,15 @@ To test the code run
 docker-compose run cloud-deploy-manager-service pytest  
 ```
 ## Design Choices
-The server deployed as a repository style architecture. I chose this because I think i provides a nice layer of abstraction between the models I defined and the application logice handleing the request.
+The server deployed as a repository style architecture. I chose this because I think i provides a nice layer of abstraction between the models I defined and the application logic handleing the request.
 
-Instead of parsing the response data directly I decided to use keyword arguments to map the response into python objects. This was done to increase the readablility and maintainability of the server. Using python objects also allows for more extendability for the server if it was required to anything further.
+Instead of parsing the response data directly I decided to use keyword arguments to map the response into python objects. This was done to increase the readablility and maintainability of the server. Using python objects also allows for more extendability for the server if it was required to do anything further.
 
 For managing the cache I used the flask_caching. This was done to minimize the effort of managing redis queries and not requiring a whole seperate class to manage redis configuration. This also allowed my view functions to be decorated with the cached decorator making it easier to add more caching options if required.
 
-The server is configured using flask blueprints. This allows for api versioning if required and decouples the api built for this project from any other future work that may be required.
+The server is configured using flask blueprints. This allows for api versioning if required and decouples the api from any other future work that may be required.
 
-For implementing the bonus I removed the default behaviour of only using the date range between June 1, 2019 - May 31, 2020, to any date range entered by the user. I thought it would be confusing behaviour to someone consuming the API to not include query parameters and have a random (from their perspective) date range used.
+For implementing the bonus I removed the default behaviour of only using the date range between June 1, 2019 - May 31, 2020 to any date range entered by the user. I thought it would be confusing behaviour to someone consuming the API to not include query parameters and have a random (from their perspective) date range used.
 
 For mocking I used postman.
 
